@@ -114,6 +114,25 @@
             </if>
         </where>
     </select>
+<!--    根据Order查找属性相同的所有Order-->
+    <select id="queryOrders" resultType="com.whx.vo.OrderVo" parameterType="com.whx.entity.Order">
+        SELECT
+        o.proname proname,
+        i.imageurl imageurl,
+        b.busname busname,
+        b.servertime servertime,
+        p.proprice proprice
+        FROM meirong.order o,project p,business b,image i
+        where o.proid = p.id
+        and o.busid = b.id
+        and p.imageid = i.id
+        <if test="openid != null and openid != ''">
+                AND o.openid = #{openid}
+        </if>
+        <if test="orderstate !=null and orderstate!= ''">
+                AND o.orderstate = #{orderstate}
+        </if>
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

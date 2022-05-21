@@ -6,6 +6,7 @@ import com.whx.dao.OrderDao;
 import com.whx.service.OrderService;
 import com.whx.util.ResponseData;
 import com.whx.util.StringUtil;
+import com.whx.vo.OrderVo;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * (Order)表服务实现类
@@ -118,5 +120,28 @@ public class OrderServiceImpl implements OrderService {
             return new ResponseData("9999","网络异常");
         }
 
+    }
+
+    /**
+     * 根据Order状态和token，查询所有Order
+     * @param orderstate
+     * @param token
+     * @return
+     */
+    @Override
+    public ResponseData getOrderByState(String orderstate, String token) {
+        try {
+            //如上根据token获取openid
+            String openid = userDao.queryOpenidByToken(token);
+
+            Order order = new Order();
+            order.setOpenid(openid);
+            order.setOrderstate(orderstate);
+            List<OrderVo> orders = orderDao.queryOrders(order);
+            return new ResponseData("0","请求成功!",orders);
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseData("9999","网络异常!");
+        }
     }
 }

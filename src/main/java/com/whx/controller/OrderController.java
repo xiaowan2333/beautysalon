@@ -91,5 +91,11 @@ public class OrderController {
         System.out.println("order = "+order);
         return orderService.createOrder(order,token);
     }
+
+    @ApiOperation(value = "查询订单",notes = "根据订单状态查询")
+    @GetMapping("getOrderByState")
+    public ResponseData getOrderByState(String orderstate,String token){
+        return orderService.getOrderByState(orderstate,token);
+    }
 }
 

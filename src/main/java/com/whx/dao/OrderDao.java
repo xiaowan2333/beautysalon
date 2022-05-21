@@ -1,6 +1,7 @@
 package com.whx.dao;
 
 import com.whx.entity.Order;
+import com.whx.vo.OrderVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
@@ -80,6 +81,14 @@ public interface OrderDao {
      * @return 影响行数
      */
     int deleteById(Long id);
+
+    /**
+     * 全查询
+     * 根据Order查找相同属性的所有Order
+     * @param order
+     * @return
+     */
+    List<OrderVo> queryOrders(Order order);
 
 }
 
