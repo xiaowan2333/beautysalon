@@ -8,115 +8,41 @@
         <result property="techname" column="techname" jdbcType="VARCHAR"/>
         <result property="busid" column="busid" jdbcType="INTEGER"/>
         <result property="imageurl" column="imageurl" jdbcType="VARCHAR"/>
-    </resultMap>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="TechnicianMap">
-        select
-          id, techexplain, techname, busid, imageurl
-        from technician
-        where id = #{id}
-    </select>
+        <collection property="projects" ofType="com.whx.entity.Project">
+            <result property="id" column="pid"></result>
+            <result property="proname" column="proname"></result>
+            <result property="proprice" column="proprice"></result>
+        </collection>
+    </resultMap>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TechnicianMap">
         select
-          id, techexplain, techname, busid, imageurl
+            id, techexplain, techname, busid, imageurl
         from technician
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="techexplain != null and techexplain != ''">
-                and techexplain = #{techexplain}
-            </if>
-            <if test="techname != null and techname != ''">
-                and techname = #{techname}
-            </if>
-            <if test="busid != null">
-                and busid = #{busid}
-            </if>
-            <if test="imageurl != null and imageurl != ''">
-                and imageurl = #{imageurl}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
+                 limit #{offset}, #{limit}
     </select>
 
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
-        from technician
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="techexplain != null and techexplain != ''">
-                and techexplain = #{techexplain}
-            </if>
-            <if test="techname != null and techname != ''">
-                and techname = #{techname}
-            </if>
-            <if test="busid != null">
-                and busid = #{busid}
-            </if>
-            <if test="imageurl != null and imageurl != ''">
-                and imageurl = #{imageurl}
-            </if>
-        </where>
+<!--    查询技师总条数-->
+    <select id="queryCount" resultType="java.lang.Long">
+        select count(id) FROM technician
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into technician(techexplain, techname, busid, imageurl)
-        values (#{techexplain}, #{techname}, #{busid}, #{imageurl})
-    </insert>
+<!--    查询技师byId-->
+    <select id="getTecInfoById" resultType="com.whx.entity.Technician">
+        SELECT
+            t.id id,
+            t.techexplain techexplain,
+            t.techname techname,
+            t.busid busid,
+            t.imageurl imageurl
+        FROM
+            technician t
+        where t.id = #{id}
+    </select>
+    <!--项目-->
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into technician(techexplain, techname, busid, imageurl)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-        (#{entity.techexplain}, #{entity.techname}, #{entity.busid}, #{entity.imageurl})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into technician(techexplain, techname, busid, imageurl)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.techexplain}, #{entity.techname}, #{entity.busid}, #{entity.imageurl})
-        </foreach>
-        on duplicate key update
-        techexplain = values(techexplain),
-        techname = values(techname),
-        busid = values(busid),
-        imageurl = values(imageurl)
-    </insert>
-
-    <!--通过主键修改数据-->
-    <update id="update">
-        update technician
-        <set>
-            <if test="techexplain != null and techexplain != ''">
-                techexplain = #{techexplain},
-            </if>
-            <if test="techname != null and techname != ''">
-                techname = #{techname},
-            </if>
-            <if test="busid != null">
-                busid = #{busid},
-            </if>
-            <if test="imageurl != null and imageurl != ''">
-                imageurl = #{imageurl},
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from technician where id = #{id}
-    </delete>
 
 </mapper>
 

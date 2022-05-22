@@ -54,7 +54,10 @@ public class Order implements Serializable {
      * 关联产品id
      */
     private Long proid;
-    
+
+    /**
+     * 技师id
+     */
     private Long tecid;
 
 

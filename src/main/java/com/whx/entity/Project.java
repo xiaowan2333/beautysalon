@@ -142,5 +142,21 @@ public class Project implements Serializable {
         this.tecid = tecid;
     }
 
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", image=" + image +
+                ", proexplain='" + proexplain + '\'' +
+                ", proprice=" + proprice +
+                ", prostep='" + prostep + '\'' +
+                ", protypeid=" + protypeid +
+                ", proname='" + proname + '\'' +
+                ", imageid=" + imageid +
+                ", prostatus='" + prostatus + '\'' +
+                ", busid=" + busid +
+                ", tecid=" + tecid +
+                '}';
+    }
 }
 

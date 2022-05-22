@@ -16,7 +16,7 @@ public class OrderVo {
      * 项目价格
      */
     //????
-    private Object proprice;
+    private Double proprice;
     /**
      * 图片路径
      */
@@ -38,11 +38,11 @@ public class OrderVo {
         this.proname = proname;
     }
 
-    public Object getProprice() {
+    public Double getProprice() {
         return proprice;
     }
 
-    public void setProprice(Object proprice) {
+    public void setProprice(Double proprice) {
         this.proprice = proprice;
     }
 

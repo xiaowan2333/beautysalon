@@ -50,6 +50,18 @@
     <select id="queryCount" resultType="java.lang.Long">
         SELECT count(id) FROM project WHERE prostatus = '1'
     </select>
+<!--    根据对应技师中间表，查询所属技师的项目-->
+    <select id="getProByTec" resultType="com.whx.entity.Project">
+        SELECT
+            p.id id,
+            p.proname proname,
+            p.proprice proprice
+        FROM
+            technician t,project p,tecpro tp
+        where tp.tecid = t.id
+          and tp.proid = p.id
+          and t.id = #{id}
+    </select>
 
     <!--修改映射 注意修改column="pid" 因为sql中代表项目的id别名是pid -->
     <resultMap type="com.whx.entity.Project" id="ProjectMap">

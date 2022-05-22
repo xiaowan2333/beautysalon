@@ -1,6 +1,7 @@
 package com.whx.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (Technician)实体类
@@ -31,6 +32,18 @@ public class Technician implements Serializable {
      */
     private String imageurl;
 
+    /**
+     * 技师能做的项目列表
+     */
+    private List<Project> projects;
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
 
     public Long getId() {
         return id;

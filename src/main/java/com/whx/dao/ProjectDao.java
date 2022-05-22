@@ -37,5 +37,11 @@ public interface ProjectDao {
      */
     Long queryCount();
 
+    /**
+     * 根据对应技师中间表，查询所属技师的项目
+     * @param id
+     * @return
+     */
+    List<Project> getProByTec(Long id);
 }
 
