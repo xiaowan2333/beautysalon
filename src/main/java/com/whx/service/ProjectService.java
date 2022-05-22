@@ -57,8 +57,10 @@ public interface ProjectService {
     /**
      * 获取所有项目信息
      * @return
+     * @param page
+     * @param limit
      */
-    ResponseData getProinfos();
+    ResponseData getProinfos(int page, int limit);
 
     /**
      * 根据id获取所有项目信息

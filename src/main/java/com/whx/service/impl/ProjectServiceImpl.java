@@ -85,12 +85,15 @@ public class ProjectServiceImpl implements ProjectService {
     /**
      * 查询所有项目信息
      * @return
+     * @param page
+     * @param limit
      */
     @Override
-    public ResponseData getProinfos() {
+    public ResponseData getProinfos(int page, int limit) {
         try {
-            List<Project> projects = projectDao.getProinfos();
-            return new ResponseData("0","请求成功！",projects);
+            List<Project> projects = projectDao.getProinfos((page-1)*limit,limit);
+            Long count = projectDao.queryCount();
+            return new ResponseData("0","请求成功！",projects,count);
 //            return new ResponseData("9999","网络异常");
         } catch (Exception e) {
             System.out.println(e);

@@ -205,6 +205,11 @@
         from project p,image i
         where p.imageid = i.id
         and p.prostatus = '1'
+        limit #{page},#{limit}
+    </select>
+<!--    获取项目总条数-->
+    <select id="queryCount" resultType="java.lang.Long">
+        SELECT count(id) FROM project WHERE prostatus = '1'
     </select>
 
     <!--修改映射 注意修改column="pid" 因为sql中代表项目的id别名是pid -->

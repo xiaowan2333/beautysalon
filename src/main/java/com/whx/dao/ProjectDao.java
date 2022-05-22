@@ -84,7 +84,16 @@ public interface ProjectDao {
     /**
      * 查询所有项目信息
      * @return
+     * @param page
+     * @param limit
      */
-    List<Project> getProinfos();
+    List<Project> getProinfos(@Param("page") int page,@Param("limit") int limit);
+
+    /**
+     * 获取项目总条数
+     * @return
+     */
+    Long queryCount();
+
 }
 
