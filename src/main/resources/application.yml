@@ -6,3 +6,15 @@ spring:
     password: root
 server:
   port: 8080
+#启用knife4j增强模式
+knife4j:
+  enable: true
+  #生产模式屏蔽, true将禁止访问API在线文档, false可以看到文档, 密码失效
+  production: false
+  #Basic认证功能，即是否需要通过用户名、密码验证后才可以访问在线API文档
+  basic:
+    enable: true
+  #如果开启Basic认证却未配置用户名与密码，默认是：admin/123321, 即使输入对了, 也会一直循环
+    username: root
+    password: root
+  #为了节省流量, 返回数据时, 配置不返回属性值为null的数据
